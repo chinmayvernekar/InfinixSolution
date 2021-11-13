@@ -19,7 +19,12 @@ public class BillService{
 	BillRepository billRepository;
 	
 	//Add Bill To Data Base
-	public void addBill( Bill bill) { billRepository.save(bill); }
+	public void addBill( Bill bill) { 
+		int tot = (int) (bill.getTax() * bill.getBillPrice()) / 100;
+	
+	bill.setTotalPrice(tot + bill.getBillPrice());
+		
+		billRepository.save(bill); }
 	
 	//List All the Bills
 	public List<Bill> findAll() {
